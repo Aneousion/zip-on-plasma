@@ -22,7 +22,6 @@ function TutorialOverlay({ step }: TutorialOverlayProps) {
 
   // Find target element with proper cleanup
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout | undefined;
     
     const findTarget = () => {
       if (step.target === 'body') {
@@ -55,11 +54,10 @@ function TutorialOverlay({ step }: TutorialOverlayProps) {
     findTarget();
 
     // Also try after a short delay for dynamic content
-    const timeout = setTimeout(findTarget, 300);
-    timeoutId = timeout;
+    const timeoutId = setTimeout(findTarget, 300);
 
     return () => {
-      if (timeoutId) clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
     };
   }, [step.target, step.id]); // Only depend on step properties
 
@@ -315,7 +313,7 @@ export default function FixedTutorialSystem() {
     if (tutorialState.currentPage !== newPage) {
       setCurrentPage(newPage as 'dashboard' | 'profile');
     }
-  }, []); // Empty dependency array, only run once on mount
+  }, [tutorialState.currentPage, setCurrentPage]); // Add dependencies
 
   // Listen for URL changes
   useEffect(() => {
