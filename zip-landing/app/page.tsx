@@ -305,7 +305,7 @@ export default function Home() {
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}>
             <div className="text-sm font-medium mb-8 sm:mb-0 text-[#71767b]">
-              © 2024 ZIP ON PLASMA
+              © 2025 ZIP ON PLASMA
             </div>
             
             <div className="flex gap-6">
